@@ -49,23 +49,26 @@ pre {
   line-height: 1.5;
   letter-spacing: normal;
   white-space: pre;
-  color: #eee;
+  color: #000;
   background: $midnightblue;
   -webkit-overflow-scrolling: touch;
 
   code {
     padding: 0;
     margin: 0;
-    background: #272822;
+    background: #888;
+    font-family: $code-fonts;
   }
 }
 
 code {
-  color: #eee;
-  background: $highlight-grey;
+  color: #000;
+  background: #888;
+  border: #000;
   border-radius: 3px;
   padding: 0 3px;
   margin: 0 4px;
+  font-family: $code-fonts;
   word-wrap: break-word;
   letter-spacing: normal;
 }
@@ -382,7 +385,7 @@ p.img-404 {
       }
 
       &:hover {
-        border-color: #fff;
+        border-color: #666;
       }
 
       svg {
@@ -584,6 +587,12 @@ hr.post-end {
   ol {
     padding: 0;
     margin-left: 1.8em;
+  }
+
+  a {
+    &:hover {
+      color: #fff;
+    }
   }
 
   a.anchor {

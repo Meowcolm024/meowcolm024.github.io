@@ -48,7 +48,7 @@ hasCJKLanguage = true
 
   [[params.socialLinks]]
     name = "instagram"
-    url = "https:/instagram.com/"
+    url = "https://instagram.com/"
 
   [[params.socialLinks]]
     name = "gitlab"
@@ -57,6 +57,7 @@ hasCJKLanguage = true
   [[params.socialLinks]]
     name = "github"
     url = "https://github.com/Meowcolm024/"
+
 
 [menu]
   [[menu.main]]
@@ -68,3 +69,8 @@ hasCJKLanguage = true
     name = "About"
     url = "about/"
     weight = 20
+
+[markup]
+  [markup.highlight]
+    codeFences = true
+    style = 'vs'
