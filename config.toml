@@ -37,8 +37,8 @@ hasCJKLanguage = true
   homeSubtitlePrinter = true
   scrollToTop = true 
   global_mathjax = false
-  readTime = true
-  readTimeSeparator = "\u2026 \u23F2 Reading Time:"
+  # readTime = true
+  # readTimeSeparator = "\u2026 \u23F2 Reading Time:"
   # legacyLayout = false
 
   [[params.assets]]
