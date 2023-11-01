@@ -304,8 +304,8 @@ table {
   padding: .6em 1.8em;
   z-index: 1;
   box-sizing: border-box;
-  box-shadow: -1px -2px 3px 0px rgba(0, 0, 0, 0.45);
-  background-color: $dark-grey;
+  box-shadow: -1px -2px 3px 0px #ddd;
+  background-color: #fff;
 
   ul {
     list-style: none;
