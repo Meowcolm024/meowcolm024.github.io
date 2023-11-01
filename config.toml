@@ -1,0 +1,70 @@
+baseURL = 'https://meowcolm024.github.io/'
+languageCode = 'en-us'
+title = 'Meowcolm'
+theme = "Hermit-V2"
+
+copyright = "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License."
+enableEmoji = true
+hasCJKLanguage = true
+# disableKinds = ['RSS']
+
+[author]
+  name = "Malcolm Law"
+  about = "about"
+
+# [taxonomies]
+#   tag = "tags"
+
+[params]
+  dateform        = "Jan 2, 2006"
+  dateformShort   = "Jan 2"
+  dateformNum     = "2006-01-02"
+  dateformNumTime = "2006-01-02 15:04 -0700"
+
+  # Metadata mostly used in document's head
+  description = "Profile page"
+  # images = [""]
+  themeColor = "#494f5c"
+
+  homeSubtitle = "Site under construction :D"
+  footerCopyright = ' <a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC BY-NC 4.0</a>'
+
+  justifyContent = true
+
+  relatedPosts = true
+  code_copy_button = true
+
+  homeSubtitlePrinter = true
+  scrollToTop = true 
+  global_mathjax = false
+  readTime = true
+  readTimeSeparator = "\u2026 \u23F2 Reading Time:"
+  # legacyLayout = false
+
+  [[params.assets]]
+    favicon = "img/favicon.ico"
+    apple_touch_icon = "img/favicon.ico"
+    safari_pinned_tab = "img/favicon.ico"
+
+  [[params.social]]
+    name = "instagram"
+    url = "https:/instagram.com/"
+
+  [[params.social]]
+    name = "gitlab"
+    url = "https://gitlab.com/Meowcolm024/"
+
+  [[params.social]]
+    name = "github"
+    url = "https://github.com/Meowcolm024/"
+
+[menu]
+  [[menu.main]]
+    name = "Blog"
+    url = "https://meowcolm024.gitlab.io/blog/"
+    weight = 10
+
+  [[menu.main]]
+    name = "About"
+    url = "about/"
+    weight = 20

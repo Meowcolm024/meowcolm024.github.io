@@ -1,0 +1,24 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>Posts on Meowcolm</title>
+		<link>https://meowcolm024.github.io/posts/</link>
+		<description>Recent content in Posts on Meowcolm</description>
+		<generator>Hugo -- gohugo.io</generator>
+		<language>en-us</language>
+		<copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
+		<lastBuildDate>Wed, 01 Nov 2023 09:17:29 +0800</lastBuildDate>
+		<atom:link href="https://meowcolm024.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+		
+		<item>
+			<title>Hello</title>
+			<link>https://meowcolm024.github.io/posts/hello/</link>
+			<pubDate>Wed, 01 Nov 2023 09:17:29 +0800</pubDate>
+			
+			<guid>https://meowcolm024.github.io/posts/hello/</guid>
+			<description>Hello</description>
+			<content type="html"><![CDATA[<p>Hello</p>
+]]></content>
+		</item>
+		
+	</channel>
+</rss>
