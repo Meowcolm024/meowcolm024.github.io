@@ -1,7 +1,7 @@
 baseURL = 'https://meowcolm024.github.io/'
 languageCode = 'en-us'
 title = 'Meowcolm'
-theme = "Hermit-V2"
+theme = "hermit-v2"
 
 copyright = "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License."
 enableEmoji = true
