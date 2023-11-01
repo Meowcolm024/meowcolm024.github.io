@@ -46,15 +46,15 @@ hasCJKLanguage = true
     apple_touch_icon = "img/favicon.ico"
     safari_pinned_tab = "img/favicon.ico"
 
-  [[params.social]]
+  [[params.socialLinks]]
     name = "instagram"
     url = "https:/instagram.com/"
 
-  [[params.social]]
+  [[params.socialLinks]]
     name = "gitlab"
     url = "https://gitlab.com/Meowcolm024/"
 
-  [[params.social]]
+  [[params.socialLinks]]
     name = "github"
     url = "https://github.com/Meowcolm024/"
 
