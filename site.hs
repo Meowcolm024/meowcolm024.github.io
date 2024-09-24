@@ -29,7 +29,7 @@ main = hakyllWith config $ do
     route $ setExtension "html"
     compile $
       pandocCompiler'
-        >>= loadAndApplyTemplate "templates/basic.html" defaultContext
+        >>= loadAndApplyTemplate "templates/default.html" defaultContext
         >>= relativizeUrls
 
   match "posts/*" $ do
@@ -37,7 +37,7 @@ main = hakyllWith config $ do
     compile $
       pandocCompiler'
         >>= loadAndApplyTemplate "templates/post.html" postCtx
-        >>= loadAndApplyTemplate "templates/basic.html" postCtx
+        >>= loadAndApplyTemplate "templates/default.html" postCtx
         >>= relativizeUrls
 
   create ["archive.html"] $ do
@@ -50,7 +50,7 @@ main = hakyllWith config $ do
               <> defaultContext
       makeItem ""
         >>= loadAndApplyTemplate "templates/archive.html" archiveCtx
-        >>= loadAndApplyTemplate "templates/basic.html" archiveCtx
+        >>= loadAndApplyTemplate "templates/default.html" archiveCtx
         >>= relativizeUrls
 
   match "index.html" $ do
@@ -58,10 +58,10 @@ main = hakyllWith config $ do
     compile $ do
       posts <- recentFirst =<< loadAll "posts/*"
       let indexCtx =
-            listField "posts" postCtx (pure posts) <> defaultContext
+            listField "posts" postCtx (pure (take 5 posts)) <> defaultContext
       getResourceBody
         >>= applyAsTemplate indexCtx
-        >>= loadAndApplyTemplate "templates/default.html" indexCtx
+        >>= loadAndApplyTemplate "templates/index.html" indexCtx
         >>= relativizeUrls
 
 --------------------------------------------------------------------------------

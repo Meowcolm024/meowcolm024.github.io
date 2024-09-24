@@ -3,28 +3,6 @@
   With a bit (lot) of modification
 */
 
-body[a=dark] {
-  filter: invert(1);
-}
-body[a=dark] img {
-  filter: invert(1);
-}
-body[a=dark] img.ioda {
-  filter: invert(0);
-}
-
-@media (prefers-color-scheme: light) {
-  body[a=auto] {
-    filter: invert(1);
-  }
-  body[a=auto] img {
-    filter: invert(1);
-  }
-  body[a=auto] img.ioda {
-    filter: invert(0);
-  }
-}
-
 html, body {
   background: white;
   max-width: 640px;
@@ -40,8 +18,11 @@ html {
 
 body {
   color: black;
-  font-family: monospace;
+  font-family: "Noto Sans Mono", /* "Noto Sans TC", "Noto Sans JP", */ monospace;
+  font-weight: 400;
   font-size: 16px;
+  font-optical-sizing: auto;
+  font-style: normal;
   line-height: 1.4;
   margin: 0;
   min-height: 100%;
@@ -153,4 +134,3 @@ img {
   display: block;
   margin: 0 auto;
 }
-

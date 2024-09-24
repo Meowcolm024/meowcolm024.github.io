@@ -7,7 +7,11 @@
 code[class*="language-"],
 pre[class*="language-"] {
 	color: #393A34;
-	font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+	/* font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace; */
+	font-family: "Source Code Pro", Consolas, Monaco, monospace;
+	font-optical-sizing: auto;
+	font-style: normal;
+	font-weight: 400;
 	direction: ltr;
 	text-align: left;
 	white-space: pre;

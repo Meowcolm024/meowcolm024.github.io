@@ -7,13 +7,22 @@
 
     <title>markdown example</title>
 
+    <!-- icons -->
     <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
     <link rel="apple-touch-icon" href="../images/favicon.ico">
 
+    <!-- css -->
     <link rel="stylesheet" href="../css/default.css" />
     <link rel="stylesheet" href="../css/prism-vs.css" />
+
+    <!-- NOTO SANS MONO, Source Code Pro font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Mono:wght@100..900&family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
+    <!-- NOTO SANS TC, JP fonts -->
+    <!-- <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&family=Noto+Sans+TC:wght@100..900&display=swap" rel="stylesheet"> -->
 </head>
-    <body>
+    <body style="margin-top: 1rem;">
         <header>
             <a href="../">..</a>
         </header>
@@ -28,15 +37,19 @@
         <hr />
 <h2 id="emphasis"><a href="#emphasis">#</a> Emphasis</h2>
 <p><strong>This is bold text</strong></p>
-<p><strong>This is bold text</strong></p>
-<p><em>This is italic text</em></p>
 <p><em>This is italic text</em></p>
 <p><del>Strikethrough</del></p>
 <hr />
 <h2 id="lists"><a href="#lists">#</a> Lists</h2>
 <ol type="1">
-<li>First ordered list item</li>
-<li>Another item</li>
+<li>First ordered list item
+<ol type="1">
+<li>inside a list</li>
+</ol></li>
+<li>Another item
+<ul>
+<li>but not ordered</li>
+</ul></li>
 </ol>
 <ul>
 <li>Unorder item 1</li>
@@ -56,20 +69,21 @@
 <p>Duplicated footnote reference<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>.</p>
 <hr />
 <h2 id="code-and-syntax-highlighting"><a href="#code-and-syntax-highlighting">#</a> Code and Syntax Highlighting</h2>
-<p>Inline: <code>$ cabal build</code></p>
+<p>Inline: use teh cammand <code>$ cabal build</code> to build the project.</p>
 <p>Code blocks:</p>
 <pre><code class="language-haskell">primes :: [Integer]
 primes = filterPrime [2..] where
   filterPrime (p:xs) =
     p : filterPrime [x | x <- xs, x `mod` p /= 0]</code></pre>
-<pre><code class="language-coq">Theorem add_assoc'' : ∀ n m p : nat,
+<pre><code class="language-coq">Theorem add_assoc : ∀ n m p : nat,
   n + (m + p) = (n + m) + p.
 Proof.
   intros n m p. induction n as [| n' IHn'].
   - (* n = 0 *)
     reflexivity.
   - (* n = S n' *)
-    simpl. rewrite IHn'. reflexivity. Qed.</code></pre>
+    simpl. rewrite IHn'. reflexivity. 
+Qed.</code></pre>
 <hr />
 <h2 id="mathematics"><a href="#mathematics">#</a> Mathematics</h2>
 <p>The expression <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msubsup><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>∞</mi></msubsup><msup><mi>i</mi><mrow><mi>−</mi><mn>2</mn></mrow></msup></mrow><annotation encoding="application/x-tex">\sum_{i=1}^{\infty} i^{-2}</annotation></semantics></math> is inlined.</p>

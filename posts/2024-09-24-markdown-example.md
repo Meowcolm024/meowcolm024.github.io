@@ -8,11 +8,7 @@ title: markdown example
 
 **This is bold text**
 
-__This is bold text__
-
 *This is italic text*
-
-_This is italic text_
 
 ~~Strikethrough~~
 
@@ -21,7 +17,9 @@ _This is italic text_
 ## Lists
 
 1. First ordered list item
+   1. inside a list
 2. Another item
+   - but not ordered
 
 - Unorder item 1
 - Another one
@@ -54,7 +52,7 @@ Duplicated footnote reference[^second].
 
 ## Code and Syntax Highlighting
 
-Inline: `$ cabal build`
+Inline: use teh cammand `$ cabal build` to build the project.
 
 Code blocks:
 
@@ -66,14 +64,15 @@ primes = filterPrime [2..] where
 ```
 
 ```coq
-Theorem add_assoc'' : ∀ n m p : nat,
+Theorem add_assoc : ∀ n m p : nat,
   n + (m + p) = (n + m) + p.
 Proof.
   intros n m p. induction n as [| n' IHn'].
   - (* n = 0 *)
     reflexivity.
   - (* n = S n' *)
-    simpl. rewrite IHn'. reflexivity. Qed.
+    simpl. rewrite IHn'. reflexivity. 
+Qed.
 ```
 
 ------
