@@ -1,0 +1,10 @@
+# haskell
+_cache/
+_site/
+dist-newstyle/
+
+# macOS
+.DS_Store
+
+# vscode
+.vscode/

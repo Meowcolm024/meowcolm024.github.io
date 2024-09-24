@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+    <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>markdown example</title>
+
+    <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+    <link rel="apple-touch-icon" href="../images/favicon.ico">
+
+    <link rel="stylesheet" href="../css/default.css" />
+    <link rel="stylesheet" href="../css/prism-vs.css" />
+</head>
+    <body>
+        <header>
+            <a href="../">..</a>
+        </header>
+        <main role="main">
+            <h1>markdown example</h1>
+            <article>
+    <section class="header" style="text-align: right;">
+        September 24, 2024
+        
+    </section>
+    <section>
+        <hr />
+<h2 id="emphasis"><a href="#emphasis">#</a> Emphasis</h2>
+<p><strong>This is bold text</strong></p>
+<p><strong>This is bold text</strong></p>
+<p><em>This is italic text</em></p>
+<p><em>This is italic text</em></p>
+<p><del>Strikethrough</del></p>
+<hr />
+<h2 id="lists"><a href="#lists">#</a> Lists</h2>
+<ol type="1">
+<li>First ordered list item</li>
+<li>Another item</li>
+</ol>
+<ul>
+<li>Unorder item 1</li>
+<li>Another one</li>
+</ul>
+<hr />
+<h2 id="images"><a href="#images">#</a> Images</h2>
+<p>Image test:</p>
+<figure>
+<img src="https://octodex.github.com/images/stormtroopocat.jpg" title="The Stormtroopocat" alt="Stormtroopocat" />
+<figcaption aria-hidden="true">Stormtroopocat</figcaption>
+</figure>
+<hr />
+<h2 id="footnotes"><a href="#footnotes">#</a> Footnotes</h2>
+<p>Footnote 1 link<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>.</p>
+<p>Footnote 2 link<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>.</p>
+<p>Duplicated footnote reference<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>.</p>
+<hr />
+<h2 id="code-and-syntax-highlighting"><a href="#code-and-syntax-highlighting">#</a> Code and Syntax Highlighting</h2>
+<p>Inline: <code>$ cabal build</code></p>
+<p>Code blocks:</p>
+<pre><code class="language-haskell">primes :: [Integer]
+primes = filterPrime [2..] where
+  filterPrime (p:xs) =
+    p : filterPrime [x | x <- xs, x `mod` p /= 0]</code></pre>
+<pre><code class="language-coq">Theorem add_assoc'' : ∀ n m p : nat,
+  n + (m + p) = (n + m) + p.
+Proof.
+  intros n m p. induction n as [| n' IHn'].
+  - (* n = 0 *)
+    reflexivity.
+  - (* n = S n' *)
+    simpl. rewrite IHn'. reflexivity. Qed.</code></pre>
+<hr />
+<h2 id="mathematics"><a href="#mathematics">#</a> Mathematics</h2>
+<p>The expression <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msubsup><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>∞</mi></msubsup><msup><mi>i</mi><mrow><mi>−</mi><mn>2</mn></mrow></msup></mrow><annotation encoding="application/x-tex">\sum_{i=1}^{\infty} i^{-2}</annotation></semantics></math> is inlined.</p>
+<p>Math blocks:</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><mn>1</mn><mrow><mn>1</mn><mo>+</mo><mroot><mn>2</mn><mn>3</mn></mroot><mo>+</mo><mroot><mn>4</mn><mn>3</mn></mroot></mrow></mfrac><mo>=</mo><mroot><mn>2</mn><mn>3</mn></mroot><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">
+\frac{1}{1 + \sqrt[3]{2} + \sqrt[3]{4}} = \sqrt[3]{2} - 1
+</annotation></semantics></math></p>
+<hr />
+<h2 id="tables"><a href="#tables">#</a> Tables</h2>
+<p>Colons can be used to align columns.</p>
+<table>
+<thead>
+<tr>
+<th>Tables</th>
+<th style="text-align: center;">Are</th>
+<th style="text-align: right;">Cool</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>col 3 is</td>
+<td style="text-align: center;">right-aligned</td>
+<td style="text-align: right;">$1600</td>
+</tr>
+<tr>
+<td>col 2 is</td>
+<td style="text-align: center;">centered</td>
+<td style="text-align: right;">$12</td>
+</tr>
+<tr>
+<td>zebra stripes</td>
+<td style="text-align: center;">are neat</td>
+<td style="text-align: right;">$1</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="blockquotes"><a href="#blockquotes">#</a> Blockquotes</h2>
+<blockquote>
+<p>Blockquotes are very handy in email to emulate reply text.
+This line is part of the same quote.</p>
+</blockquote>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr />
+<ol>
+<li id="fn1"><p>Footnote <strong>can have markup</strong></p>
+<p>and multiple paragraphs.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>Footnote text.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>Footnote text.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
+    </section>
+</article>
+
+        </main>
+        <footer style="text-align: center;">
+    Theme inspired by (and copied from) <a href="https://github.com/riggraz/no-style-please">no style, please!</a>
+    <br>
+    Site powered by <a href="http://jaspervdj.be/hakyll">hakyll</a>
+</footer>
+
+        <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+        <script src="../scripts/prism.js"></script>
+    </body>
+</html>
