@@ -30,6 +30,8 @@ html, body {
   max-width: 640px;
   position: relative;
   margin: auto;
+  padding-right: 10px;
+  padding-left: 10px;
 }
 
 html {
@@ -51,32 +53,31 @@ header {
 }
 
 footer {
-  margin-top: auto;
-  margin-top: 1rem;
+  margin-top: 2rem;
+  padding: 2rem;
   font-size: 0.8rem;
-  color: #555;
 }
 
 .post-meta {
   text-align: right;
 }
 
+a {
+  background-color: transparent;
+  text-decoration: underline;
+}
+
 a:link {
   color: black;
-  background-color: transparent;
-  text-decoration: none;
 }
 
 a:visited {
   color: grey;
-  background-color: transparent;
-  text-decoration: none;
 }
 
 a:hover {
   color: #555;
-  background-color: transparent;
-  text-decoration: underline;
+  font-style: oblique;
 }
 
 h2, h3, h4, h5, h6 {
