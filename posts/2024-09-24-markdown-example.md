@@ -1,5 +1,6 @@
 ---
 title: markdown example
+tags: test
 ---
 
 ------

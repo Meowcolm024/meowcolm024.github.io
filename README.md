@@ -16,3 +16,4 @@ $ cabal run site build
 1. Syntax highlighting via [Prism.js](https://prismjs.com)
 2. Section hyperlink (check this [article](https://frasertweedale.github.io/blog-fp/posts/2020-12-10-hakyll-section-links.html))
 3. Use `Noto Sans Mono` font from [Google Fonts](https://fonts.google.com/noto/specimen/Noto+Sans+Mono)
+4. Tags support (check this [article](https://myme.no/posts/2023-01-13-adding-tags-to-hakyll.html))

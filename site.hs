@@ -1,6 +1,7 @@
 --------------------------------------------------------------------------------
 {-# LANGUAGE OverloadedStrings #-}
 
+import Data.Char (toLower)
 import Data.Text (Text)
 import Hakyll
 import Text.Pandoc
@@ -32,18 +33,47 @@ main = hakyllWith config $ do
         >>= loadAndApplyTemplate "templates/default.html" defaultContext
         >>= relativizeUrls
 
-  match "posts/*" $ do
-    route $ setExtension "html"
-    compile $
-      pandocCompiler'
-        >>= loadAndApplyTemplate "templates/post.html" postCtx
-        >>= loadAndApplyTemplate "templates/default.html" postCtx
-        >>= relativizeUrls
+  tags <- buildTags "posts/*" (fromCapture "tags/_*.html" . map toLower)
 
-  create ["archive.html"] $ do
+  tagsRules tags $ \tagStr tagsPattern -> do
     route idRoute
     compile $ do
-      posts <- recentFirst =<< loadAll "posts/*"
+      posts <- loadAll tagsPattern >>= recentFirst
+      let postsCtx =
+            constField "title" ("tag/" <> tagStr)
+              <> listField "posts" postCtx (return posts)
+              <> defaultContext
+      makeItem ""
+        >>= loadAndApplyTemplate "templates/archive.html" postsCtx
+        >>= loadAndApplyTemplate "templates/default.html" postsCtx
+        >>= relativizeUrls
+
+  -- tags page
+  create ["tags/index.html"] $ do
+    route idRoute
+    let tagsCtx =
+          tagCloudField "body" 100.0 300.0 tags
+            <> constField "title" "tags"
+            <> defaultContext
+    compile $ do
+      makeItem ""
+        >>= loadAndApplyTemplate "templates/default.html" tagsCtx
+        >>= relativizeUrls
+
+  match "posts/*" $ do
+    route $ setExtension "html"
+    let tagsCtx = tagsField "tags" tags <> postCtx
+    compile $
+      pandocCompiler'
+        >>= loadAndApplyTemplate "templates/post.html" tagsCtx
+        >>= loadAndApplyTemplate "templates/default.html" tagsCtx
+        >>= relativizeUrls
+
+  -- archive page
+  create ["posts/index.html"] $ do
+    route idRoute
+    compile $ do
+      posts <- recentFirst =<< loadAll "posts/*.md"
       let archiveCtx =
             listField "posts" postCtx (pure posts)
               <> constField "title" "archives"
@@ -56,7 +86,7 @@ main = hakyllWith config $ do
   match "index.html" $ do
     route idRoute
     compile $ do
-      posts <- recentFirst =<< loadAll "posts/*"
+      posts <- recentFirst =<< loadAll "posts/*.md"
       let indexCtx =
             listField "posts" postCtx (pure (take 5 posts)) <> defaultContext
       getResourceBody

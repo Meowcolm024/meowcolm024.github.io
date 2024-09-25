@@ -1,5 +1,6 @@
 ---
 title: languages test
+tags: test, unicode
 ---
 
 中文《史記》：

@@ -1,5 +1,6 @@
 ---
 title: lorem ipsum
+tags: test
 ---
 
 Lorem ipsum odor amet, consectetuer adipiscing elit. Mi egestas mattis nisi vulputate eu hac. Phasellus blandit varius ullamcorper pharetra viverra. Imperdiet aenean fringilla justo tincidunt vestibulum. Condimentum eros himenaeos hac ipsum sociosqu mollis fusce euismod. Maecenas montes blandit eleifend mollis duis nullam amet faucibus inceptos. At volutpat vehicula commodo eu eu inceptos.
