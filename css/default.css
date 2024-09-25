@@ -1,6 +1,9 @@
 /* 
-  Shamelessly stolen from https://github.com/riggraz/no-style-please
-  With a bit (lot) of modification
+  Shamelessly stolen >_< from `no-style-please` (under MIT license)
+  [no-style-please.scss](https://github.com/riggraz/no-style-please/blob/master/_sass/no-style-please.scss)
+  Copyright (c) 2020 Riccardo Graziosi
+
+  This CSS file is heavily modifed by `meowcolm024`
 */
 
 html, body {
@@ -107,18 +110,6 @@ table, th, td {
   border-collapse: collapse;
   padding: 0.4rem;
 }
-
-/* code {
-  color: white;
-  background: black;
-}
-
-div.highlighter-rouge code {
-  display: block;
-  overflow-x: auto;
-  white-space: pre-wrap;
-  padding: 1rem;
-} */
 
 blockquote {
   font-style: italic;
