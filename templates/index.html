@@ -1,11 +1,12 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" theme="light">
     $partial("templates/partials/header.html")$
-    <body style="margin-top: 2rem;" >
+    <body> <div class="container">
         <main role="main">
-            <h1 style="font-size: 2.5rem;">$title$</h1>
+            <h1 style="font-size: 2.5rem;"> $title$ </h1>
             $body$
         </main>
         $partial("templates/partials/footer.html")$
-    </body>
+        <script src="/scripts/theme.js"></script>
+    </div> </body>
 </html>

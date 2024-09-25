@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" theme="light">
     <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -13,7 +13,7 @@
 
     <!-- css -->
     <link rel="stylesheet" href="../css/default.css" />
-    <link rel="stylesheet" href="../css/prism-vs.css" />
+    <link id="prism" rel="stylesheet" href="../css/prism-vs.css" />
 
     <!-- NOTO SANS MONO, Source Code Pro font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -22,10 +22,12 @@
     <!-- NOTO SANS TC, JP fonts -->
     <!-- <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&family=Noto+Sans+TC:wght@100..900&display=swap" rel="stylesheet"> -->
 </head>
-    <body style="margin-top: 1rem;">
-        <header>
+    <body> <div class="container">
+        <nav>
             <a id="back" href="../">..</a>
-        </header>
+            <a href="../">/</a>
+            <a id="dark" onclick="dark_mode()"></a>
+        </nav>
         <main role="main">
             <h1>tag/unicode</h1>
             <ul>
@@ -44,8 +46,9 @@
     Site powered by <a href="http://jaspervdj.be/hakyll">hakyll</a>
 </footer>
 
-        <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-        <script src="../scripts/prism.js"></script>
+        <script src="../scripts/theme.js"></script>
         <script src="../scripts/default.js"></script>
-    </body>
+        <script src="../scripts/prism.js"></script>
+        <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    </div> </body>
 </html>

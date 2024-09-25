@@ -6,39 +6,57 @@
   This CSS file is heavily modifed by `meowcolm024`
 */
 
-html, body {
-  background: white;
+[theme='light'] {
+  /* light mode */
+  --background: white;
+  --text: black;
+  --a-visited: gray;
+  --a-hover: #555;
+}
+
+[theme='dark'] {
+  /* dark mode */
+  --background: #212121;
+  --text: white;
+  --a-visited: #888;
+  --a-hover: #aaa;
+}
+
+.container {
   max-width: 640px;
-  position: relative;
-  margin: auto;
+  margin: 0 auto;
   padding-right: 10px;
   padding-left: 10px;
 }
 
-html {
+html, body {
+  background: var(--background);
+  position: relative;
   height: 100%;
+  margin: 0 auto;
 }
 
 body {
-  color: black;
+  color: var(--text);
   font-family: "Noto Sans Mono", /* "Noto Sans TC", "Noto Sans JP", */ monospace;
   font-weight: 400;
   font-size: 16px;
   font-optical-sizing: auto;
   font-style: normal;
   line-height: 1.4;
-  margin: 0;
   min-height: 100%;
   overflow-wrap: break-word;
+  padding-top: 4rem;
 }
 
 header {
-  margin-top: 1rem;
+  padding-top: 4rem;
 }
 
 footer {
-  margin-top: 2rem;
-  padding: 2rem;
+  margin: auto;
+  padding-top: 2rem;
+  padding-bottom: 1rem;
   font-size: 0.8rem;
 }
 
@@ -52,15 +70,15 @@ a {
 }
 
 a:link {
-  color: black;
+  color: var(--text);
 }
 
 a:visited {
-  color: grey;
+  color: var(--a-visited);
 }
 
 a:hover {
-  color: #555;
+  color: var(--a-hover);
   font-style: oblique;
 }
 
@@ -84,11 +102,10 @@ li {
   background: #f0f000;
 } */
 
-.w {
-  max-width: 640px;
-  margin: 0 auto;
-  padding: 4rem 2rem;
-}
+/* button {
+  background: none;
+  border: 0;
+} */
 
 hr {
   text-align: center;
@@ -106,14 +123,14 @@ table {
 }
 
 table, th, td {
-  border: thin solid black;
+  border: thin solid var(--text);
   border-collapse: collapse;
   padding: 0.4rem;
 }
 
 blockquote {
   font-style: italic;
-  border: thin solid black;
+  border: thin solid var(--text);
   padding: 1rem;
 }
 blockquote p {

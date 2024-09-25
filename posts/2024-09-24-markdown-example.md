@@ -53,7 +53,7 @@ Duplicated footnote reference[^second].
 
 ## Code and Syntax Highlighting
 
-Inline: use teh cammand `$ cabal build` to build the project.
+Inline: use the cammand `$ cabal build` to build the project.
 
 Code blocks:
 
