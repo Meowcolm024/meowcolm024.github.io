@@ -33,7 +33,12 @@ main = hakyllWith config $ do
         >>= loadAndApplyTemplate "templates/default.html" defaultContext
         >>= relativizeUrls
 
-  tags <- buildTags "posts/*" (fromCapture "tags/_*.html" . map toLower)
+  tags <-
+    buildTags
+      "posts/*"
+      ( fromCapture "tags/-*-.html" -- advoid confusion with `index` tag
+          . map toLower
+      )
 
   tagsRules tags $ \tagStr tagsPattern -> do
     route idRoute
