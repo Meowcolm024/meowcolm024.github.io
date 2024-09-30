@@ -61,6 +61,7 @@ markdown s = case result of
 lightSwitch :: H.Html
 lightSwitch = H.a "" ! A.id "dark" ! A.onclick "dark_mode()"
 
+-- generate the index page
 generate :: Content a -> String
 generate c = case runExcept $ runRWST c undefined 2 of
   Right (_, _, h) -> renderHtml h
