@@ -18,3 +18,16 @@ $ cabal run site build
 3. Tags support (check this [article](https://myme.no/posts/2023-01-13-adding-tags-to-hakyll.html))
 4. Dark mode support with toggle button (mostly usable)
 5. Use `Noto Sans Mono` font from [Google Fonts](https://fonts.google.com/noto/specimen/Noto+Sans+Mono)
+6. A simple _eDSL_ to configure the homepage
+
+## Notes
+
+- `content/Index.hs`: the _index_ page of the site
+  - alternatively, you can write your own index page (e.g. `content/index.htm`) and modify the `index :: Index` binding in the `hs` file
+- `content/about.md`: the _about_ page of the site
+- `posts/yyyy-mm-dd-*.md`: all your posts here (prefixed with dates)
+- `images/favicon.ico`: the _favicon_ of the site
+
+## TODO
+
+- [ ] Add more configs to the _eDSL_

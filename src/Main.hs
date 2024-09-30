@@ -1,11 +1,14 @@
 --------------------------------------------------------------------------------
 {-# LANGUAGE OverloadedStrings #-}
 
+import Control.Monad ((>=>))
 import Data.Char (toLower)
 import Data.Text (Text)
 import Hakyll
+import qualified Index
 import Text.Pandoc
 import Text.Pandoc.Walk (walk)
+import qualified Util
 
 --------------------------------------------------------------------------------
 main :: IO ()
@@ -26,50 +29,13 @@ main = hakyllWith config $ do
 
   match "templates/partials/*" $ compile templateCompiler
 
-  match (fromList ["about.md"]) $ do
-    route $ setExtension "html"
-    compile $
-      pandocCompiler'
-        >>= loadAndApplyTemplate "templates/default.html" defaultContext
-        >>= relativizeUrls
-
-  tags <-
-    buildTags
-      "posts/*"
-      ( fromCapture "tags/-*-.html" -- advoid confusion with `index` tag
-          . map toLower
-      )
-
-  tagsRules tags $ \tagStr tagsPattern -> do
-    route idRoute
-    compile $ do
-      posts <- loadAll tagsPattern >>= recentFirst
-      let postsCtx =
-            constField "title" ("tag/" <> tagStr)
-              <> listField "posts" postCtx (return posts)
-              <> defaultContext
-      makeItem ""
-        >>= loadAndApplyTemplate "templates/archive.html" postsCtx
-        >>= loadAndApplyTemplate "templates/default.html" postsCtx
-        >>= relativizeUrls
-
-  -- tags page
-  create ["tags/index.html"] $ do
-    route idRoute
-    let tagsCtx =
-          tagCloudField "body" 100.0 300.0 tags
-            <> constField "title" "tags"
-            <> defaultContext
-    compile $ do
-      makeItem ""
-        >>= loadAndApplyTemplate "templates/default.html" tagsCtx
-        >>= relativizeUrls
+  tags <- createTags
 
   match "posts/*" $ do
     route $ setExtension "html"
     let tagsCtx = tagsField "tags" tags <> postCtx
     compile $
-      pandocCompiler'
+      postCompiler
         >>= loadAndApplyTemplate "templates/post.html" tagsCtx
         >>= loadAndApplyTemplate "templates/default.html" tagsCtx
         >>= relativizeUrls
@@ -88,30 +54,89 @@ main = hakyllWith config $ do
         >>= loadAndApplyTemplate "templates/default.html" archiveCtx
         >>= relativizeUrls
 
-  match "index.html" $ do
+  match (fromList ["content/about.md"]) $ do
+    route contentRoute
+    compile $
+      postCompiler
+        >>= loadAndApplyTemplate "templates/default.html" defaultContext
+        >>= relativizeUrls
+
+  createIndexPage Index.index
+
+--------------------------------------------------------------------------------
+createTags :: Rules Tags
+createTags = do
+  -- tags generation (add `-` to avoid confusion with `index` tag)
+  tags <- buildTags "posts/*" $ fromCapture "tags/-*-.html" . map toLower
+
+  tagsRules tags $ \tagStr tagsPattern -> do
+    route idRoute
+    compile $ do
+      posts <- loadAll tagsPattern >>= recentFirst
+      let postsCtx =
+            constField "title" ("tag/" <> tagStr)
+              <> listField "posts" postCtx (return posts)
+              <> defaultContext
+      makeItem ""
+        >>= loadAndApplyTemplate "templates/archive.html" postsCtx
+        >>= loadAndApplyTemplate "templates/default.html" postsCtx
+        >>= relativizeUrls
+
+  create ["tags/index.html"] $ do
+    route idRoute
+    let tagsCtx =
+          tagCloudField "body" 100.0 300.0 tags
+            <> constField "title" "tags"
+            <> defaultContext
+    compile $
+      makeItem ""
+        >>= loadAndApplyTemplate "templates/default.html" tagsCtx
+        >>= relativizeUrls
+
+  pure tags
+
+createIndexPage :: Util.Index -> Rules ()
+createIndexPage index = case index of
+  Util.Index title content -> create ["index.html"] $ do
     route idRoute
     compile $ do
       posts <- recentFirst =<< loadAll "posts/*.md"
       let indexCtx =
-            listField "posts" postCtx (pure (take 5 posts)) <> defaultContext
-      getResourceBody
-        >>= applyAsTemplate indexCtx
-        >>= loadAndApplyTemplate "templates/index.html" indexCtx
-        >>= relativizeUrls
+            constField "title" title
+              <> constField "body" content
+              <> listField "posts" postCtx (pure (take 5 posts))
+              <> defaultContext
+      makeItem "" >>= postProc indexCtx
+  Util.File name -> match (fromGlob $ "content/" <> name) $ do
+    route contentRoute
+    compile $ do
+      posts <- recentFirst =<< loadAll "posts/*.md"
+      let indexCtx =
+            listField "posts" postCtx (pure (take 5 posts))
+              <> defaultContext
+      getResourceBody >>= postProc indexCtx
+  where
+    postProc indexCtx =
+      loadAndApplyTemplate "templates/index.html" indexCtx
+        >=> applyAsTemplate indexCtx
+        >=> relativizeUrls
 
 --------------------------------------------------------------------------------
 postCtx :: Context String
 postCtx = dateField "date" "%B %e, %Y" <> defaultContext
 
+contentRoute :: Routes
+contentRoute = gsubRoute "content/" (const "") `composeRoutes` setExtension "html"
+
 config :: Configuration
 config =
   defaultConfiguration
-    { destinationDirectory = "docs"
+    { destinationDirectory = "docs" -- for GitHub pages
     }
 
 --------------------------------------------------------------------------------
-pandocCompiler' :: Compiler (Item String)
-pandocCompiler' =
+postCompiler :: Compiler (Item String)
+postCompiler =
   pandocCompilerWithTransform
     defaultHakyllReaderOptions
     defaultHakyllWriterOptions
