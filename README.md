@@ -22,12 +22,26 @@ $ cabal run site build
 
 ## Notes
 
-- `content/Index.hs`: the _index_ page of the site
-  - alternatively, you can write your own index page (e.g. `content/index.htm`) and modify the `index :: Index` binding in the `hs` file
-- `content/about.md`: the _about_ page of the site
+- `content/Index.hs`: the (default) _index_ page of the site
+- `content/*.md`: other (non-post) pages of the site (like _about_, _contact_ etc)
 - `posts/yyyy-mm-dd-*.md`: all your posts here (prefixed with dates)
 - `images/favicon.ico`: the _favicon_ of the site
 
-## TODO
+## Homepage customization
 
-- [ ] Add more configs to the _eDSL_
+To customize homepage contents, modify the `content/Index.hs` file (checkout the file for example).
+
+- To change the title, modify `title :: String`.
+- To modify the contents, modify `content :: Content ()`. You can find a simple _eDSL_ guide below:
+  - `section :: String -> Maybe String -> Content () -> Content ()` Creates an entry with a title, optionally an URL, and some contents in the section
+  - `posts :: String -> Content ()` Creates an entry of post list with the title of the entry
+  - `none :: Content ()` Empty content
+  - `html :: Html -> Content ()` Raw html (using Bla) contents
+  - `txt :: String -> Content ()` Text contents (no fancy markups etc)
+  - `markdown :: Text -> Content ()` Markdown contents
+
+If you don't want to use the _eDSL_, you can always create your own index page (e.g. `content/index.html`), and set `index = File "index.html"`.
+
+> Q: Why an eDSL?
+>
+> A: Building an eDSL is just fun OwO (or I need to write a bunch of code to handle yaml, and it could be less flexible)

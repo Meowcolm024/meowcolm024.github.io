@@ -5,7 +5,7 @@ import Control.Monad ((>=>))
 import Data.Char (toLower)
 import Data.Text (Text)
 import Hakyll
-import qualified Index
+import Index (index)
 import Text.Pandoc
 import Text.Pandoc.Walk (walk)
 import qualified Util
@@ -54,14 +54,15 @@ main = hakyllWith config $ do
         >>= loadAndApplyTemplate "templates/default.html" archiveCtx
         >>= relativizeUrls
 
-  match (fromList ["content/about.md"]) $ do
+  -- handle other pages in `content/`
+  match "content/*.md" $ do
     route contentRoute
     compile $
       postCompiler
         >>= loadAndApplyTemplate "templates/default.html" defaultContext
         >>= relativizeUrls
 
-  createIndexPage Index.index
+  createIndexPage index
 
 --------------------------------------------------------------------------------
 createTags :: Rules Tags
@@ -103,7 +104,7 @@ createIndexPage index = case index of
       posts <- recentFirst =<< loadAll "posts/*.md"
       let indexCtx =
             constField "title" title
-              <> constField "body" content
+              <> constField "body" (Util.generate content)
               <> listField "posts" postCtx (pure (take 5 posts))
               <> defaultContext
       makeItem "" >>= postProc indexCtx
