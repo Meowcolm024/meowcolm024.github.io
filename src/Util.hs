@@ -46,14 +46,14 @@ html :: H.Html -> Content ()
 html = tell
 
 -- | simple text
-txt :: String -> Content ()
+txt :: Text -> Content ()
 txt = html . H.pre . H.toHtml
 
 -- | from markdown
 markdown :: Text -> Content ()
 markdown s = case result of
   Right h -> html h
-  Left err -> error $ show err
+  Left err -> lift $ throwE $ show err
   where
     result = P.runPure $ P.readMarkdown P.def s >>= P.writeHtml5 P.def
 

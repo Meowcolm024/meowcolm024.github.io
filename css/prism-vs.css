@@ -56,16 +56,18 @@ pre[class*="language-"] {
 
 /* Inline code */
 :not(pre) > code[class*="language-"] {
-	padding: .2em;
-	padding-top: 1px;
-	padding-bottom: 1px;
-	background: #f8f8f8;
-	border: 1px solid #dddddd;
+	padding: .2em .2em;
+	font-size: .8em;
+	background-color: #e6e6e6;
+	border: 1px solid dimgray;
 }
 
-/* Inline code no  langauge */
+/* Inline code no langauge */
 :not(pre) > code {
-	color: grey;
+	padding: .2em .2em;
+	font-size: .8em;
+	background-color: #e6e6e6;
+	border: 1px solid dimgray;
 }
 
 .token.comment,

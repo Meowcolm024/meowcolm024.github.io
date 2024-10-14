@@ -1,11 +1,11 @@
 // light/dark mode support
 
-function init(pd) {
+function init() {
     let theme = localStorage.getItem("theme");
     if (!theme) {
         // we can auto detect browser dark mode
         // https://stackoverflow.com/a/57795495/10499685
-        if (pd && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
             theme = "dark";
         } else {
             theme = "light";
@@ -33,4 +33,4 @@ function set_theme(theme) {
     }
 }
 
-init(false); // disable browser dark mode detection
+init();

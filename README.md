@@ -37,7 +37,7 @@ To customize homepage contents, modify the `content/Index.hs` file (checkout the
   - `posts :: String -> Content ()` Creates an entry of post list with a title
   - `none :: Content ()` Empty content
   - `html :: Html -> Content ()` Raw html contents (checkout [blaze-html](https://hackage.haskell.org/package/blaze-html))
-  - `txt :: String -> Content ()` Text contents (no fancy markups)
+  - `txt :: Text -> Content ()` Text contents (no fancy markups)
   - `markdown :: Text -> Content ()` Markdown contents
 
 If you don't want to use the _eDSL_, you can always create your own index page (e.g. `content/index.html`), and set `index = File "index.html"`.

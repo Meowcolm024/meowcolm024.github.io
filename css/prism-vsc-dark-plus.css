@@ -42,11 +42,6 @@ code[class*="language-"] *::selection {
 	}
 }
 
-/* Inline code no  langauge */
-:not(pre) > code {
-	color: lightgray;
-}
-
 pre[class*="language-"] {
 	padding: 1em;
 	margin: .5em 0;
@@ -61,6 +56,15 @@ pre[class*="language-"] {
 	color: #db4c69;
 	background: #1e1e1e;
 }
+
+/* Inline code no langauge */
+:not(pre) > code {
+	padding: .3em .3em;
+	font-size: .8em;
+	background-color: #404040;
+	border: 1px solid lightgray;
+}
+
 /*********************************************************
 * Tokens
 */
