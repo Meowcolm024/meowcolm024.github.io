@@ -25,6 +25,10 @@ main = hakyllWith config $ do
     route idRoute
     compile compressCssCompiler
 
+  match "font/*.woff2" $ do
+    route idRoute
+    compile copyFileCompiler
+
   match "templates/*" $ compile templateBodyCompiler
 
   match "templates/partials/*" $ compile templateCompiler

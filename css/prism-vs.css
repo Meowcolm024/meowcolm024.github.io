@@ -5,11 +5,18 @@
  * Slightly modified to fit the theme
  */
 
+ @font-face {
+    font-family: 'JuliaMono';
+    src: url('../font/JuliaMono-Regular.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
 code[class*="language-"],
 pre[class*="language-"] {
 	color: #393A34;
 	/* font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace; */
-	font-family: "Source Code Pro", Consolas, Monaco, monospace;
+	font-family: "JuliaMono"; /* "Source Code Pro", Consolas, Monaco, monospace; */
 	font-optical-sizing: auto;
 	font-style: normal;
 	font-weight: 400;
