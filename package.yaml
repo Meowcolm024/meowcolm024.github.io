@@ -1,0 +1,38 @@
+name:                homepage
+version:             0.1.0.0
+
+extra-source-files:
+- README.md
+
+dependencies:
+- base >= 4.7 && < 5
+- hakyll >= 4.16
+- pandoc >= 3.6
+- pandoc-types
+- text >= 2.0
+- containers >= 0.6
+- aeson >= 2.2
+- blaze-html
+- blaze-markup
+
+ghc-options:
+- -Wdefault
+- -Wcompat
+- -Wredundant-constraints
+- -Wincomplete-patterns
+- -Wunused-imports
+
+default-extensions:
+- OverloadedStrings
+
+language: Haskell2010
+
+executables:
+  homepage:
+    main:                Main.hs
+    source-dirs:         src
+    ghc-options:
+    - -O
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N

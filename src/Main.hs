@@ -1,14 +1,19 @@
 --------------------------------------------------------------------------------
-{-# LANGUAGE OverloadedStrings #-}
 
-import Control.Monad ((>=>))
-import Data.Char (toLower)
+import Control.Monad (forM)
+import Data.Aeson (encode, object, (.=))
+import Data.List (intersperse)
+import qualified Data.Map as M
+import Data.Maybe (catMaybes, fromMaybe)
 import Data.Text (Text)
 import Hakyll
-import Index (index)
+import Text.Blaze (ToValue (toValue), (!))
+import Text.Blaze.Html (toHtml)
+import Text.Blaze.Html.Renderer.String (renderHtml)
+import qualified Text.Blaze.Html5 as H
+import qualified Text.Blaze.Html5.Attributes as A
 import Text.Pandoc
 import Text.Pandoc.Walk (walk)
-import qualified Util
 
 --------------------------------------------------------------------------------
 main :: IO ()
@@ -33,11 +38,11 @@ main = hakyllWith config $ do
 
   match "templates/partials/*" $ compile templateCompiler
 
-  tags <- createTags
+  tagsCtx' <- createTagsCtx
 
   match "posts/*" $ do
     route $ setExtension "html"
-    let tagsCtx = tagsField "tags" tags <> postCtx
+    let tagsCtx = tagsCtx' <> postCtx
     compile $
       postCompiler
         >>= loadAndApplyTemplate "templates/post.html" tagsCtx
@@ -66,65 +71,61 @@ main = hakyllWith config $ do
         >>= loadAndApplyTemplate "templates/default.html" defaultContext
         >>= relativizeUrls
 
-  createIndexPage index
+  createIndexPage
 
 --------------------------------------------------------------------------------
-createTags :: Rules Tags
-createTags = do
-  -- tags generation (add `-` to avoid confusion with `index` tag)
-  tags <- buildTags "posts/*" $ fromCapture "tags/-*-.html" . map toLower
+createTagsCtx :: Rules (Context a)
+createTagsCtx = do
+  tags <- tagsMap <$> buildTags "posts/*" undefined
 
-  tagsRules tags $ \tagStr tagsPattern -> do
+  create ["tags.json"] $ do
     route idRoute
+    let insertTag (tag, postObj) = M.insertWith (++) tag [postObj]
     compile $ do
-      posts <- loadAll tagsPattern >>= recentFirst
-      let postsCtx =
-            constField "title" ("tag/" <> tagStr)
-              <> listField "posts" postCtx (return posts)
-              <> defaultContext
-      makeItem ""
-        >>= loadAndApplyTemplate "templates/archive.html" postsCtx
-        >>= loadAndApplyTemplate "templates/default.html" postsCtx
-        >>= relativizeUrls
+      allPostMetadata <-
+        sequence
+          [ do
+              metadata <- getMetadata id
+              let title = fromMaybe "untitled" (lookupString "title" metadata)
+              url <- getRoute id
+              pure (tag, object ["title" .= title, "url" .= url])
+            | (tag, ids) <- tags,
+              id <- ids
+          ]
+      makeItem (encode $ foldr insertTag M.empty allPostMetadata)
 
-  create ["tags/index.html"] $ do
-    route idRoute
-    let tagsCtx =
-          tagCloudField "body" 100.0 300.0 tags
-            <> constField "title" "tags"
-            <> defaultContext
-    compile $
-      makeItem ""
-        >>= loadAndApplyTemplate "templates/default.html" tagsCtx
-        >>= relativizeUrls
-
-  pure tags
-
-createIndexPage :: Util.Index -> Rules ()
-createIndexPage index = case index of
-  Util.Index title content -> create ["index.html"] $ do
-    route idRoute
-    compile $ do
-      posts <- recentFirst =<< loadAll "posts/*.md"
-      let indexCtx =
-            constField "title" title
-              <> constField "body" (Util.generate content)
-              <> listField "posts" postCtx (pure (take 5 posts))
-              <> defaultContext
-      makeItem "" >>= postProc indexCtx
-  Util.File name -> match (fromGlob $ "content/" <> name) $ do
+  match (fromGlob "content/tags.html") $ do
     route contentRoute
     compile $ do
-      posts <- recentFirst =<< loadAll "posts/*.md"
-      let indexCtx =
-            listField "posts" postCtx (pure (take 5 posts))
-              <> defaultContext
-      getResourceBody >>= postProc indexCtx
-  where
-    postProc indexCtx =
-      loadAndApplyTemplate "templates/index.html" indexCtx
-        >=> applyAsTemplate indexCtx
-        >=> relativizeUrls
+      getResourceBody
+        >>= loadAndApplyTemplate "templates/default.html" defaultContext
+        >>= relativizeUrls
+
+  let simpleRenderLink tag = fmap $ \url ->
+        H.a
+          ! A.title (H.stringValue ("All pages tagged '" <> tag <> "'."))
+          ! A.href (toValue url)
+          $ toHtml tag
+
+  pure $ field "tags" $ \item -> do
+    tags' <- getTags $ itemIdentifier item
+    links <- forM tags' $ \tag -> do
+      route' <- getRoute "content/tags.html"
+      pure $ simpleRenderLink tag ((<> "?tag=" <> tag) . toUrl <$> route')
+    pure $ renderHtml $ (mconcat . intersperse ", ") $ catMaybes links
+
+createIndexPage :: Rules ()
+createIndexPage = match (fromGlob "content/index.html") $ do
+  route contentRoute
+  compile $ do
+    posts <- recentFirst =<< loadAll "posts/*.md"
+    let indexCtx =
+          listField "posts" postCtx (pure (take 5 posts))
+            <> defaultContext
+    getResourceBody
+      >>= loadAndApplyTemplate "templates/index.html" indexCtx
+      >>= applyAsTemplate indexCtx
+      >>= relativizeUrls
 
 --------------------------------------------------------------------------------
 postCtx :: Context String

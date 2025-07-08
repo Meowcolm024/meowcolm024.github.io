@@ -8,12 +8,12 @@
     <title>tags</title>
 
     <!-- icons -->
-    <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
-    <link rel="apple-touch-icon" href="../images/favicon.ico">
+    <link rel="icon" type="image/x-icon" href="./images/favicon.ico">
+    <link rel="apple-touch-icon" href="./images/favicon.ico">
 
     <!-- css -->
-    <link rel="stylesheet" href="../css/default.css" />
-    <link id="prism" rel="stylesheet" href="../css/prism-vs.css" />
+    <link rel="stylesheet" href="./css/default.css" />
+    <link id="prism" rel="stylesheet" href="./css/prism-vs.css" />
 
     <!-- NOTO SANS MONO, Source Code Pro font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -24,13 +24,18 @@
 </head>
     <body> <div class="container">
         <nav>
-            <a id="back" href="../">..</a>
-            <a href="../">/</a>
+            <a id="back" href="./">..</a>
+            <a href="./">/</a>
             <a id="dark" onclick="dark_mode()"></a>
         </nav>
         <main role="main">
             <h1>tags</h1>
-            <a style="font-size: 233%" href="../tags/-test-.html">test</a> <a style="font-size: 100%" href="../tags/-unicode-.html">unicode</a>
+            <div id="tag-list">Loading tags...</div>
+
+<h2 id="tag-title" style="display: none;"></h2>
+<div id="post-list"></div>
+
+<script src="scripts/tags.js"></script>
         </main>
         <footer style="text-align: center;">
     theme inspired by <a href="https://github.com/riggraz/no-style-please">no style, please!</a>
@@ -38,9 +43,9 @@
     site powered by <a href="http://jaspervdj.be/hakyll">hakyll</a>
 </footer>
 
-        <script src="../scripts/theme.js"></script>
-        <script src="../scripts/default.js"></script>
-        <script src="../scripts/prism.js"></script>
+        <script src="./scripts/theme.js"></script>
+        <script src="./scripts/default.js"></script>
+        <script src="./scripts/prism.js"></script>
         <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     </div> </body>
 </html>
