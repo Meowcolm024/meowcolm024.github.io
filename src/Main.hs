@@ -1,11 +1,11 @@
 --------------------------------------------------------------------------------
-
 import Control.Monad (forM)
 import Data.Aeson (encode, object, (.=))
 import Data.List (intersperse)
 import qualified Data.Map as M
 import Data.Maybe (catMaybes, fromMaybe)
 import Data.Text (Text)
+import Data.Time.Format (defaultTimeLocale, formatTime)
 import Hakyll
 import Text.Blaze (ToValue (toValue), (!))
 import Text.Blaze.Html (toHtml)
@@ -81,17 +81,15 @@ createTagsCtx = do
   create ["tags.json"] $ do
     route idRoute
     let insertTag (tag, postObj) = M.insertWith (++) tag [postObj]
+    let createEntry tag id' = do
+          metadata <- getMetadata id'
+          let title = fromMaybe "untitled" (lookupString "title" metadata)
+          url <- getRoute id'
+          time <- getItemUTC defaultTimeLocale id'
+          let date = formatTime defaultTimeLocale "%B %e, %Y" time
+          pure (tag, object ["title" .= title, "url" .= url, "date" .= date])
     compile $ do
-      allPostMetadata <-
-        sequence
-          [ do
-              metadata <- getMetadata id
-              let title = fromMaybe "untitled" (lookupString "title" metadata)
-              url <- getRoute id
-              pure (tag, object ["title" .= title, "url" .= url])
-            | (tag, ids) <- tags,
-              id <- ids
-          ]
+      allPostMetadata <- sequence [createEntry tag id' | (tag, ids) <- tags, id' <- ids]
       makeItem (encode $ foldr insertTag M.empty allPostMetadata)
 
   match (fromGlob "content/tags.html") $ do

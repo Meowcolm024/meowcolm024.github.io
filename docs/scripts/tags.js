@@ -30,9 +30,13 @@ fetch('/tags.json')
         tagTitle.style.display = "block";
         tagTitle.textContent = `posts tagged with "${tag}"`;
 
+        const ul = document.createElement("ul");
+        
         data[tag].forEach(post => {
-            const div = document.createElement("div");
-            div.innerHTML = `<a href="${post.url}">${post.title}</a>`;
-            postList.appendChild(div);
+            const li = document.createElement("li");
+            li.innerHTML = `<a href="${post.url}">${post.title}</a> - ${post.date}`;
+            ul.appendChild(li);
         });
+
+        postList.appendChild(ul);
     });

@@ -31,4 +31,5 @@ executable homepage
     , pandoc >=3.6
     , pandoc-types
     , text >=2.0
+    , time
   default-language: Haskell2010

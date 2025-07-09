@@ -14,6 +14,7 @@ dependencies:
 - aeson >= 2.2
 - blaze-html
 - blaze-markup
+- time
 
 ghc-options:
 - -Wdefault
