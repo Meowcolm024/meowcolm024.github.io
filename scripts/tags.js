@@ -23,20 +23,25 @@ fetch('/tags.json')
             tagList.appendChild(link);
         });
 
-        if (!tag || !data[tag]) {
-            return; // No tag selected, done
+        if (!tag) {
+            return; // no tag
         }
 
         tagTitle.style.display = "block";
-        tagTitle.textContent = `posts tagged with "${tag}"`;
 
-        const ul = document.createElement("ul");
-        
-        data[tag].forEach(post => {
-            const li = document.createElement("li");
-            li.innerHTML = `<a href="${post.url}">${post.title}</a> - ${post.date}`;
-            ul.appendChild(li);
-        });
+        if (!data[tag]) {
+            tagTitle.textContent = `no post tagged with "${tag}"`;
+        } else {
+            tagTitle.textContent = `posts tagged with "${tag}"`;
 
-        postList.appendChild(ul);
+            const ul = document.createElement("ul");
+
+            data[tag].forEach(post => {
+                const li = document.createElement("li");
+                li.innerHTML = `<a href="${post.url}">${post.title}</a> - ${post.date}`;
+                ul.appendChild(li);
+            });
+
+            postList.appendChild(ul);
+        }
     });

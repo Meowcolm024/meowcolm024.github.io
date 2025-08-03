@@ -71,7 +71,18 @@ main = hakyllWith config $ do
         >>= loadAndApplyTemplate "templates/default.html" defaultContext
         >>= relativizeUrls
 
-  createIndexPage
+  -- index page
+  match (fromGlob "content/index.html") $ do
+    route contentRoute
+    compile $ do
+      posts <- recentFirst =<< loadAll "posts/*.md"
+      let indexCtx =
+            listField "posts" postCtx (pure (take 5 posts))
+              <> defaultContext
+      getResourceBody
+        >>= loadAndApplyTemplate "templates/index.html" indexCtx
+        >>= applyAsTemplate indexCtx
+        >>= relativizeUrls
 
 --------------------------------------------------------------------------------
 createTagsCtx :: Rules (Context a)
@@ -111,19 +122,6 @@ createTagsCtx = do
       route' <- getRoute "content/tags.html"
       pure $ simpleRenderLink tag ((<> "?tag=" <> tag) . toUrl <$> route')
     pure $ renderHtml $ (mconcat . intersperse ", ") $ catMaybes links
-
-createIndexPage :: Rules ()
-createIndexPage = match (fromGlob "content/index.html") $ do
-  route contentRoute
-  compile $ do
-    posts <- recentFirst =<< loadAll "posts/*.md"
-    let indexCtx =
-          listField "posts" postCtx (pure (take 5 posts))
-            <> defaultContext
-    getResourceBody
-      >>= loadAndApplyTemplate "templates/index.html" indexCtx
-      >>= applyAsTemplate indexCtx
-      >>= relativizeUrls
 
 --------------------------------------------------------------------------------
 postCtx :: Context String
