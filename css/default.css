@@ -1,4 +1,4 @@
-/* 
+/*
   This file is originally generated from `no-style-please` (under MIT license)
   [no-style-please.scss](https://github.com/riggraz/no-style-please/blob/master/_sass/no-style-please.scss)
   Copyright (c) 2020 Riccardo Graziosi
@@ -6,98 +6,110 @@
   The current CSS file is heavily modifed by `meowcolm024`
 */
 
-[theme='light'] {
-  /* light mode */
-  --background: white;
-  --text: black;
-  --a-visited: gray;
-  --a-hover: #555;
-  --quote: #e6e6e6;
+@font-face {
+    font-family: "FiraMono";
+    src: url("../font/FiraMono-Regular.woff2") format("woff2");
+    font-weight: normal;
+    font-style: normal;
 }
 
-[theme='dark'] {
-  /* dark mode */
-  --background: #212121;
-  --text: white;
-  --a-visited: #888;
-  --a-hover: #aaa;
-  --quote: #404040;
+[theme="light"] {
+    /* light mode */
+    --background: white;
+    --text: black;
+    --a-visited: gray;
+    --a-hover: #555;
+    --quote: #e6e6e6;
+}
+
+[theme="dark"] {
+    /* dark mode */
+    --background: #212121;
+    --text: white;
+    --a-visited: #888;
+    --a-hover: #aaa;
+    --quote: #404040;
 }
 
 .container {
-  max-width: 640px;
-  margin: 0 auto;
-  padding-right: 10px;
-  padding-left: 10px;
+    max-width: 640px;
+    margin: 0 auto;
+    padding-right: 10px;
+    padding-left: 10px;
 }
 
-html, body {
-  background: var(--background);
-  position: relative;
-  height: 100%;
-  margin: 0 auto;
+html,
+body {
+    background: var(--background);
+    position: relative;
+    height: 100%;
+    margin: 0 auto;
 }
 
 body {
-  color: var(--text);
-  font-family: "Noto Sans Mono", /* "Noto Sans TC", "Noto Sans JP", */ monospace;
-  font-weight: 400;
-  font-size: 16px;
-  font-optical-sizing: auto;
-  font-style: normal;
-  line-height: 1.4;
-  min-height: 100%;
-  overflow-wrap: break-word;
-  padding-top: 4rem;
+    color: var(--text);
+    font-family: "FiraMono", monospace;
+    font-weight: 400;
+    font-size: 16px;
+    font-optical-sizing: auto;
+    font-style: normal;
+    line-height: 1.4;
+    min-height: 100%;
+    overflow-wrap: break-word;
+    padding-top: 4rem;
 }
 
 header {
-  padding-top: 4rem;
+    padding-top: 4rem;
 }
 
 footer {
-  margin: auto;
-  padding-top: 2rem;
-  padding-bottom: 1rem;
-  font-size: 0.8rem;
+    margin: auto;
+    padding-top: 2rem;
+    padding-bottom: 1rem;
+    font-size: 0.8rem;
 }
 
 .post-meta {
-  text-align: right;
+    text-align: right;
 }
 
 a {
-  background-color: transparent;
-  text-decoration: underline;
+    background-color: transparent;
+    text-decoration: underline;
 }
 
 a:link {
-  color: var(--text);
+    color: var(--text);
 }
 
 a:visited {
-  color: var(--a-visited);
+    color: var(--a-visited);
 }
 
 a:hover {
-  color: var(--a-hover);
-  font-style: oblique;
+    color: var(--a-hover);
+    font-style: oblique;
 }
 
-h2, h3, h4, h5, h6 {
-  margin-top: 3rem;
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin-top: 3rem;
 }
 
 hr {
-  margin: 2rem 0;
+    margin: 2rem 0;
 }
 
 p {
-  margin: 1rem 0;
+    margin: 1rem 0;
 }
 
 li {
-  margin: 0.4rem 0;
+    margin: 0.4rem 0;
 }
 
 /* *:target {
@@ -110,38 +122,40 @@ li {
 } */
 
 hr {
-  text-align: center;
-  border: 0;
+    text-align: center;
+    border: 0;
 }
 hr:before {
-  content: "/////";
+    content: "/////";
 }
 hr:after {
-  content: attr(data-content) "/////";
+    content: attr(data-content) "/////";
 }
 
 table {
-  width: 100%;
+    width: 100%;
 }
 
-table, th, td {
-  border: thin solid var(--text);
-  border-collapse: collapse;
-  padding: 0.4rem;
+table,
+th,
+td {
+    border: thin solid var(--text);
+    border-collapse: collapse;
+    padding: 0.4rem;
 }
 
 blockquote {
-  font-style: italic;
-  border: thin solid var(--text);
-  padding: 1rem;
-  background-color: var(--quote);
+    font-style: italic;
+    border: thin solid var(--text);
+    padding: 1rem;
+    background-color: var(--quote);
 }
 blockquote p {
-  margin: 0;
+    margin: 0;
 }
 
 img {
-  max-width: 100%;
-  display: block;
-  margin: 0 auto;
+    max-width: 100%;
+    display: block;
+    margin: 0 auto;
 }

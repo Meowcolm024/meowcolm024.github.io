@@ -9,3 +9,7 @@ dist-newstyle/
 
 # vscode
 .vscode/
+
+# direnv
+.direnv/
+.envrc

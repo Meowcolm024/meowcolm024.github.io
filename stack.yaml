@@ -20,6 +20,9 @@
 snapshot:
   url: https://raw.githubusercontent.com/commercialhaskell/stackage-snapshots/master/lts/23/28.yaml
 
+nix:
+  enable: true
+
 # User packages to be built.
 # Various formats can be used as shown in the example below.
 #

@@ -1,0 +1,2 @@
+cradle:
+  cabal: # ask hls to use cabal instead

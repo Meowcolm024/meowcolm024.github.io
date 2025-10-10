@@ -17,7 +17,7 @@ $ stack run build
 2. Section hyperlink (check this [article](https://frasertweedale.github.io/blog-fp/posts/2020-12-10-hakyll-section-links.html))
 3. Tags support (JavaScript required)
 4. Dark mode support with toggle button (mostly usable)
-5. Use `Noto Sans Mono` font from [Google Fonts](https://fonts.google.com/noto/specimen/Noto+Sans+Mono) for texts.
+5. Use `Fira Mono` font from for texts [check this](https://github.com/mozilla/Fira).
 6. Use `Julia Mono` font for code blocks. (check [this](https://github.com/cormullion/juliamono))
 
 ## Notes
