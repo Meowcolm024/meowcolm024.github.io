@@ -2,4 +2,4 @@
 title: about
 ---
 
-This is the about page :D
+this is the about page :D
