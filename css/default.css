@@ -15,8 +15,8 @@
 
 [theme="light"] {
     /* light mode */
-    --background: white;
-    --text: black;
+    --background: #fafafa;
+    --text: #111;
     --a-visited: gray;
     --a-hover: #555;
     --quote: #e6e6e6;
@@ -25,7 +25,7 @@
 [theme="dark"] {
     /* dark mode */
     --background: #212121;
-    --text: white;
+    --text: #e8e8e8;
     --a-visited: #888;
     --a-hover: #aaa;
     --quote: #404040;

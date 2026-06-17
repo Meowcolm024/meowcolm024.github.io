@@ -1,38 +1,51 @@
 {
-  description = "Flake for homepage";
-
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
-    flake-utils.url = "github:numtide/flake-utils";
+    nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
+    flake-parts.url = "github:hercules-ci/flake-parts";
+    haskell-flake.url = "github:srid/haskell-flake";
   };
-
   outputs =
-    {
+    inputs@{
       self,
       nixpkgs,
-      flake-utils,
+      flake-parts,
+      ...
     }:
-    flake-utils.lib.eachDefaultSystem (
-      system:
-      let
-        pkgs = import nixpkgs { inherit system; };
-        hPkgs = pkgs.haskell.packages.ghc984;
-      in
-      {
-        devShell = pkgs.mkShell {
-          buildInputs = [
-            hPkgs.ghc
-            hPkgs.ormolu
-            hPkgs.hlint
-            hPkgs.cabal-install
-            hPkgs.haskell-language-server
-            pkgs.stack
-            pkgs.pkg-config
-            pkgs.clang
-            pkgs.git
-            pkgs.zlib
-          ];
+    flake-parts.lib.mkFlake { inherit inputs; } {
+      systems = [ "aarch64-darwin" ];
+      imports = [ inputs.haskell-flake.flakeModule ];
+
+      perSystem =
+        {
+          self',
+          pkgs,
+          config,
+          ...
+        }:
+        {
+          haskellProjects.default = {
+            autoWire = [
+              "packages"
+              "apps"
+              "checks"
+            ];
+
+          };
+
+          devShells.default = pkgs.mkShell {
+            inputsFrom = [
+              config.haskellProjects.default.outputs.devShell
+            ];
+            nativeBuildInputs = with pkgs; [
+              pkg-config
+              stack
+            ];
+            buildInputs = with pkgs; [
+              zlib
+            ];
+          };
+
+          packages.default = self'.packages.homepage;
         };
-      }
-    );
+    };
 }
