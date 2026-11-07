@@ -3,6 +3,7 @@ _cache/
 _site/
 dist-newstyle/
 .stack-work/
+result
 
 # macOS
 .DS_Store

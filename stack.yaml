@@ -17,7 +17,7 @@
 #
 # snapshot: ./custom-snapshot.yaml
 # snapshot: https://example.com/snapshots/2024-01-01.yaml
-snapshot: lts-24.45
+snapshot: lts-24.60
 
 # User packages to be built.
 # Various formats can be used as shown in the example below.
@@ -64,3 +64,8 @@ packages:
 #
 # Allow a newer minor version of GHC than the snapshot specifies
 # compiler-check: newer-minor
+nix:
+  enable: true
+  packages:
+    - zlib
+    - pkg-config
